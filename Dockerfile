@@ -1,6 +1,6 @@
 # ============================================================
 # Hermes Agent Lite — 极简版
-# 仅：长期记忆 + 平台消息(Telegram) + 图片视觉 + 终端工具
+# 仅：长期记忆 + 消息平台(Telegram + Yuanbao) + 图片视觉 + 终端工具
 # 无浏览器 / 无 TUI / 无 Web Dashboard / 无 Playwright / 无 Node.js
 # ============================================================
 FROM ghcr.io/astral-sh/uv:0.11.6-python3.13-trixie AS uv_source
@@ -38,9 +38,10 @@ RUN uv venv
 # ── 源码（.dockerignore 已排除所有不需要的目录）──
 COPY . .
 
-# ── 仅安装核心 + Telegram（跳过所有重型 extras）──
+# ── 仅安装核心 + Telegram + Yuanbao（跳过所有重型 extras）──
 # 核心：openai, anthropic, httpx, rich, pydantic, croniter, edge-tts 等
-# Telegram：唯一的消息平台
+# Telegram：消息平台
+# Yuanbao：消息平台（纯 Python，httpx 已在核心依赖中）
 # 不装：voice(whisper), rl(atropos), web(dashboard), honcho, matrix,
 #       modal, daytona, vercel, tts-premium, dev, bedrock, mistral, google
 RUN uv pip install --no-cache-dir -e "." && \
