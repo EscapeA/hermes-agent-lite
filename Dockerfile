@@ -46,8 +46,10 @@ COPY . .
 RUN uv pip install --no-cache-dir -e "." && \
     uv pip install --no-cache-dir "python-telegram-bot[webhooks]>=22.6,<23"
 
-# ── 权限（保持 root，entrypoint 负责 gosu 降权）──
-RUN chmod -R a+rX /opt/hermes
+# ── 创建运行用户 + 权限 ──
+RUN useradd -u 10000 -m -d /opt/data hermes && \
+    chmod -R a+rX /opt/hermes && \
+    chown -R hermes:hermes /opt/hermes
 
 VOLUME ["/opt/data"]
 ENTRYPOINT ["/usr/bin/tini", "-g", "--", "/opt/hermes/docker/entrypoint.sh"]
