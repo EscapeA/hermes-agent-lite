@@ -1,27 +1,49 @@
-# Git
+# ── Git ──
 .git
 .gitignore
 .gitmodules
 
-# Dependencies
-node_modules
+# ── 前端 / TUI ──
+web/
+ui-tui/
 **/node_modules
+
+# ── 依赖 ──
 .venv
 **/.venv
 
-# Built artifacts that are regenerated inside the image.  Excluded so local
-# rebuilds on the developer's machine don't invalidate the npm-install layer
-# that now depends on the full ui-tui/packages/hermes-ink/ tree being present.
-ui-tui/dist/
-ui-tui/packages/hermes-ink/dist/
-
-# CI/CD
+# ── CI/CD / GitHub ──
 .github
 
-# Environment files
+# ── 环境文件 ──
 .env
 
-*.md
-
-# Runtime data (bind-mounted at /opt/data; must not leak into build context)
+# ── 运行时数据（Docker volume mount）──
 data/
+
+# ── 文档 ──
+*.md
+LICENSE
+RELEASE_*.md
+docs/
+website/
+plans/
+
+# ── 测试 / 训练 / 脚本 ──
+tests/
+environments/
+datagen-config-examples/
+scripts/
+tinker-atropos/
+examples/
+
+# ── 其他非必要文件 ──
+nix/
+flake.*
+packaging/
+Dockerfile.txt
+docker-compose.yml
+AGENTS.md
+CONTRIBUTING.md
+SECURITY.md
+hermes-already-has-routines.md
