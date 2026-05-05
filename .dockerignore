@@ -21,6 +21,10 @@ ui-tui/
 # ── 运行时数据（Docker volume mount）──
 data/
 
+# ── Compose/profile runtime state (upstream) ──
+hermes-config/
+runtime/
+
 # ── 文档 ──
 *.md
 LICENSE
